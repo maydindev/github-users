@@ -228,3 +228,47 @@
     transform: rotate(0deg);
   }
 }
+
+/*My Styles*/
+.prjTitle {
+  text-align: left;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.userFilter {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.userInput {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  margin: 10px;
+}
+
+.userButton {
+  background-color: greenyellow;
+  width: 100%;
+  padding: 5px;
+  margin: 10px;
+}
+
+.userCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  list-style: none;
+}
+

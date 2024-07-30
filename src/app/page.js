@@ -1,8 +1,68 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useState } from "react";
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [users, setUsers] = useState([]);
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    if (searchTerm) {
+      try {
+        const response = await fetch(
+          `https://api.github.com/search/users?q=${searchTerm}`
+        );
+        const data = await response.json();
+        setUsers(data.items || []);
+      } catch (error) {
+        console.error("Error fetching GitHub users:", error);
+      }
+    }
+  };
+
   return (
+    <div>
+
+      <div className={styles.prjTitle}>
+      <h1>Project 5: Github User Search</h1>
+      </div>
+      
+      <div className={styles.userFilter}>
+        <input className={styles.userInput}
+          type="text"
+          placeholder="Kullanıcı adı veya e-mail"
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+        <button className={styles.userButton} onClick={handleSearch}>Search</button>
+      </div>
+
+      <div className={styles.prjTitle}>
+      <h2>Results</h2>
+      </div>
+
+      <div>
+        <ul>
+          {users.map((user) => (
+            <li key={user.id} className={styles.userCard}>
+              <div>
+              <img src={user.avatar_url} alt={user.login} width="50" /> <br />
+              <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                {user.login}
+              </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    /*
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
@@ -91,5 +151,6 @@ export default function Home() {
         </a>
       </div>
     </main>
+    */
   );
 }
